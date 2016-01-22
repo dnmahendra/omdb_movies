@@ -1,0 +1,38 @@
+<div class="intro">
+	<h1>OMDB Movie Database</h1>
+
+	<form action="/">
+		<input type="text" name="movie_name" placeholder="Enter movie name">
+		<button>Search!</button>
+	</form>
+
+</div>
+
+<% if params[:movie_name] %>
+	
+	<div class='movie'>
+	<% if @result['Search'].length == 1 %>
+
+		<h1 class="title"><%= @title %></h1>	
+		<img class="poster" src="<%= @poster %>">
+		<div class="details">
+			<p>YEAR: <%= @year %></p>
+			<p>RUNTIME: <%= @runtime %></p>
+			<p>LANGUAGE: <%= @language %></p>
+			<p>COUNTRY: <%= @country %></p>
+			<p>GENRE: <%= @genre %></p>
+			<p>IMDB RATING: <%= @rating %></p>
+			<p class="plot">PLOT: <%= @plot %></p>
+		</div>
+	<% else %>
+	
+
+	<% @result['Search'].each do |item| %>
+		<div class="movie_list">
+			<h3 class="titles"><a href="/about/<%= item['Title'] %>"> <%= item['Title'] %> </a></h3>	
+			<img class="posters" src="<%= item['Poster'] %>">
+		</div>
+	<% end %>
+	<% end %>
+	</div>
+<% end %>
